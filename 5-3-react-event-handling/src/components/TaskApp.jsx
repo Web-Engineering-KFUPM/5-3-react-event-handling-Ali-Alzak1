@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import TaskList from "./TaskList";
 
+
+
 export default function TaskApp() {
+
+  const [text, setText] = useState("");
+  const [tasks, setTasks] = useState([]);
+
   
   const handleSubmit = () => {
-   
+    setTasks([...tasks, { id: Date.now(), text }]);
+    setText("");
   };
 
   
@@ -27,14 +34,21 @@ export default function TaskApp() {
           className="input"
           // TODO: value={text}
           // TODO: onChange={(e) => setText(e.target.value)}
-          onKeyDown={(e) => {
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          onKeyDown={(e) => {            
             if (e.key === "Enter") handleSubmit();
           }}
         />
+        
+
         <button className="btn btn--primary" onClick={handleSubmit}>
           Submit
         </button>
       </div>
+      
+
+      <p>{}</p>
 
       {/*Render Task List and Enable Delete */}
       {/*Pass tasks and onDelete */}
